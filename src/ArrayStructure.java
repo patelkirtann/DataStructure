@@ -6,21 +6,21 @@ import java.util.Scanner;
 public class ArrayStructure {
 
     private static Scanner sc = new Scanner(System.in);
-    private int[] totalArray = new int[50];
-    private static int arrayLength;
+    private int[] arrayLength = new int[50];
+    private static int arraySize;
     private boolean flag = false;
     private int counter = 0;
 
     private void setArrayLength() {
         System.out.print("Set Array Length (Length<50):");
-        arrayLength = sc.nextInt();
+        arraySize = sc.nextInt();
     }
 
     private void generateRandomArray() {
-        if (arrayLength < 50) {
-            for (int i = 0; i < arrayLength; i++) {
-                totalArray[i] = (int) (Math.random() * 10);
-                System.out.println("index [" + i + "]: " + totalArray[i]);
+        if (arraySize < 50) {
+            for (int i = 0; i < arraySize; i++) {
+                arrayLength[i] = (int) (Math.random() * 10);
+                System.out.println("index [" + i + "]: " + arrayLength[i]);
             }
         } else {
             System.out.println("Put the valid amount");
@@ -31,20 +31,20 @@ public class ArrayStructure {
     private void printArray() {
 //        System.out.println("New Array :");
         System.out.print("index[] : ");
-        for (int i = 0; i < arrayLength; i++) {
+        for (int i = 0; i < arraySize; i++) {
             System.out.print(i + "   ");
         }
         System.out.println();
         System.out.print("Value   : ");
-        for (int i = 0; i < arrayLength; i++) {
-            System.out.print(totalArray[i] + "   ");
+        for (int i = 0; i < arraySize; i++) {
+            System.out.print(arrayLength[i] + "   ");
         }
         System.out.println();
     }
 
     private void getIndexValue(int index) {
-        if (index < arrayLength) {
-            System.out.println("Value at index[" + index + "] is " + totalArray[index]);
+        if (index < arraySize) {
+            System.out.println("Value at index[" + index + "] is " + arrayLength[index]);
         } else {
             System.out.println("Wrong index Value");
         }
@@ -52,9 +52,9 @@ public class ArrayStructure {
 
     private void linearSearchValue(int value) {
         int valueFound = -1;
-        for (int i = 0; i < arrayLength; i++) {
+        for (int i = 0; i < arraySize; i++) {
             counter++;
-            if (totalArray[i] == value) {
+            if (arrayLength[i] == value) {
                 valueFound = i;
                 System.out.println("Found " + value + " at index[" + i + "]");
             }
@@ -68,8 +68,8 @@ public class ArrayStructure {
 
     private boolean hasValue(int value) {
         boolean val = false;
-        for (int i = 0; i < arrayLength; i++) {
-            if (totalArray[i] == value) {
+        for (int i = 0; i < arraySize; i++) {
+            if (arrayLength[i] == value) {
                 val = true;
                 break;
             }
@@ -78,36 +78,36 @@ public class ArrayStructure {
     }
 
     private void deleteValueAtIndex(int index) {
-        if (index < arrayLength) {
-            for (int i = index; i < arrayLength - 1; i++) {
-                totalArray[i] = totalArray[i + 1];
+        if (index < arraySize) {
+            for (int i = index; i < arraySize - 1; i++) {
+                arrayLength[i] = arrayLength[i + 1];
             }
-            arrayLength--;
+            arraySize--;
         }
         printArray();
     }
 
     private void insertValue(int value) {
-        if (arrayLength < 50) {
-            totalArray[arrayLength] = value;
-            arrayLength++;
+        if (arraySize < 50) {
+            arrayLength[arraySize] = value;
+            arraySize++;
         }
         printArray();
     }
 
     private void swapValue(int i, int j) {
-        int temp = totalArray[i];
-        totalArray[i] = totalArray[j];
-        totalArray[j] = temp;
+        int temp = arrayLength[i];
+        arrayLength[i] = arrayLength[j];
+        arrayLength[j] = temp;
     }
 
     private void bubbleSort() {
         flag = true;
-        for (int i = ArrayStructure.arrayLength - 1; i > 1; i--) {
+        for (int i = ArrayStructure.arraySize - 1; i > 1; i--) {
             counter++;
             for (int j = 0; j < i; j++) {
                 counter++;
-                if (totalArray[j] > totalArray[j + 1])
+                if (arrayLength[j] > arrayLength[j + 1])
                     swapValue(j, j + 1);
             }
         }
@@ -119,11 +119,11 @@ public class ArrayStructure {
     private void selectionSort() {
         flag = true;
 
-        for (int i = 0; i < arrayLength; i++) {
+        for (int i = 0; i < arraySize; i++) {
             counter++;
             int min = i;
-            for (int j = i; j < arrayLength; j++) {
-                if (totalArray[min] > totalArray[j]) {
+            for (int j = i; j < arraySize; j++) {
+                if (arrayLength[min] > arrayLength[j]) {
                     min = j;
                     counter++;
                 }
@@ -138,17 +138,17 @@ public class ArrayStructure {
 
     private void insertionSort() {
         flag = true;
-        for (int i = 0; i < arrayLength; i++) {
+        for (int i = 0; i < arraySize; i++) {
             counter++;
             int j = i;
-            int insertVal = totalArray[i];
+            int insertVal = arrayLength[i];
 
-            while ((j > 0) && ((totalArray[j - 1] > insertVal))) {
-                totalArray[j] = totalArray[j - 1];
+            while ((j > 0) && ((arrayLength[j - 1] > insertVal))) {
+                arrayLength[j] = arrayLength[j - 1];
                 j--;
                 counter++;
             }
-            totalArray[j] = insertVal;
+            arrayLength[j] = insertVal;
         }
         printArray();
         System.out.println("Total Iteration: " + counter);
@@ -159,16 +159,16 @@ public class ArrayStructure {
     private void binarySearchValue(int value) {
         if (flag) {
             int firstIndex = 0;
-            int lastIndex = arrayLength - 1;
+            int lastIndex = arraySize - 1;
 
             while (firstIndex <= lastIndex) {
                 int middleIndex = (firstIndex + lastIndex) / 2;
                 counter++;
-                if (totalArray[middleIndex] < value) {
+                if (arrayLength[middleIndex] < value) {
                     firstIndex = middleIndex;
-                } else if (totalArray[middleIndex] > value) {
+                } else if (arrayLength[middleIndex] > value) {
                     lastIndex = middleIndex;
-                } else if (totalArray[middleIndex] == value) {
+                } else if (arrayLength[middleIndex] == value) {
                     System.out.println("Value " + value + " found at index[" + middleIndex + "]");
 //                firstIndex = lastIndex;
                     break;
@@ -251,7 +251,7 @@ public class ArrayStructure {
         arrayStructure.setArrayLength();
         arrayStructure.generateRandomArray();
 
-        while (arrayLength < 50) {
+        while (arraySize < 50) {
             arrayStructure.switchCase();
         }
 
