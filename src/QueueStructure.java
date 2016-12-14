@@ -7,7 +7,6 @@ public class QueueStructure {
 
     private int[] queueLength;
     private int queueSize;
-
     private int front, rear, totalItems;
 
     QueueStructure(int size) {
@@ -85,5 +84,6 @@ public class QueueStructure {
 
         qs.peek();
         qs.printQueue();
+
     }
 }
